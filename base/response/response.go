@@ -1,9 +1,9 @@
 package response
 
 import (
-	micropb "gitlab.com/kickstar/sdk-go/base/pb/micro"
-	"gitlab.com/kickstar/sdk-go/utils"
-	"gitlab.com/kickstar/sdk-go/utils/transform"
+	micropb "gitlab.com/kickstar/backend/sdk-go/base/pb/micro"
+	"gitlab.com/kickstar/backend/sdk-go/utils"
+	"gitlab.com/kickstar/backend/sdk-go/utils/transform"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )
 

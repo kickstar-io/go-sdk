@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	redis "gitlab.com/kickstar/sdk-go/db/redis"
+	redis "gitlab.com/kickstar/backend/sdk-go/db/redis"
 )
 
 func main() {

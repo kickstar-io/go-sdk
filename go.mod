@@ -1,4 +1,4 @@
-module gitlab.com/kickstar/sdk-go
+module gitlab.com/kickstar/backend/sdk-go
 
 go 1.17
 

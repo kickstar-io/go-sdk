@@ -13,14 +13,14 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"gitlab.com/kickstar/sdk-go/config/vault"
-	"gitlab.com/kickstar/sdk-go/db"
-	ed "gitlab.com/kickstar/sdk-go/eventdriven"
-	j "gitlab.com/kickstar/sdk-go/jwt"
-	"gitlab.com/kickstar/sdk-go/log"
-	"gitlab.com/kickstar/sdk-go/pubsub/kafka"
-	"gitlab.com/kickstar/sdk-go/service/micro"
-	"gitlab.com/kickstar/sdk-go/utils"
+	"gitlab.com/kickstar/backend/sdk-go/config/vault"
+	"gitlab.com/kickstar/backend/sdk-go/db"
+	ed "gitlab.com/kickstar/backend/sdk-go/eventdriven"
+	j "gitlab.com/kickstar/backend/sdk-go/jwt"
+	"gitlab.com/kickstar/backend/sdk-go/log"
+	"gitlab.com/kickstar/backend/sdk-go/pubsub/kafka"
+	"gitlab.com/kickstar/backend/sdk-go/service/micro"
+	"gitlab.com/kickstar/backend/sdk-go/utils"
 )
 
 type HTTPServer struct {

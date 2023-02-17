@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"gitlab.com/kickstar/sdk-go/log"
+	"gitlab.com/kickstar/backend/sdk-go/log"
 )
 
 const (

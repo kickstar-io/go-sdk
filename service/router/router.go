@@ -1,25 +1,25 @@
 package router
 
 import (
-	ev "gitlab.com/kickstar/sdk-go/base/event"
-	"gitlab.com/kickstar/sdk-go/cache/redis"
-	"gitlab.com/kickstar/sdk-go/config/vault"
-	ed "gitlab.com/kickstar/sdk-go/eventdriven"
-	"gitlab.com/kickstar/sdk-go/log"
+	ev "gitlab.com/kickstar/backend/sdk-go/base/event"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/cache/redis"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/config/vault"
+	ed "gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/eventdriven"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/log"
 
-	//"gitlab.com/kickstar/sdk-go/pubsub/kafka"
-	//"gitlab.com/kickstar/sdk-go/db"
-	e "gitlab.com/kickstar/sdk-go/base/error"
-	"gitlab.com/kickstar/sdk-go/utils"
+	//"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/pubsub/kafka"
+	//"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db"
+	e "gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/base/error"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/utils"
 
-	//"gitlab.com/kickstar/sdk-go/db/mongo/status"
-	"gitlab.com/kickstar/sdk-go/pubsub/kafka"
-	//e "gitlab.com/kickstar/sdk-go/base/error"
+	//"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db/mongo/status"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/pubsub/kafka"
+	//e "gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/base/error"
 	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
-	"gitlab.com/kickstar/sdk-go/db"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db"
 	//"errors"
 )
 

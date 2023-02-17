@@ -15,7 +15,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
-	"gitlab.com/kickstar/sdk-go/log/pubsub/zapx"
+	"gitlab.com/kickstar/backend/sdk-go/log/pubsub/zapx"
 )
 
 type Logger struct {

@@ -2,11 +2,11 @@ package micro
 
 import (
 	"github.com/grpc-ecosystem/go-grpc-middleware/util/metautils"
-	micropb "gitlab.com/kickstar/sdk-go/base/pb/micro"
-	"gitlab.com/kickstar/sdk-go/utils"
+	micropb "gitlab.com/kickstar/backend/sdk-go/base/pb/micro"
+	"gitlab.com/kickstar/backend/sdk-go/utils"
 	"google.golang.org/grpc/metadata"
 
-	//"gitlab.com/kickstar/sdk-go/jwt"
+	//"gitlab.com/kickstar/backend/sdk-go/jwt"
 	"context"
 	"fmt"
 	"os"
@@ -15,8 +15,8 @@ import (
 
 	"github.com/google/uuid"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
-	e "gitlab.com/kickstar/sdk-go/base/error"
-	"gitlab.com/kickstar/sdk-go/utils/transform"
+	e "gitlab.com/kickstar/backend/sdk-go/base/error"
+	"gitlab.com/kickstar/backend/sdk-go/utils/transform"
 	"google.golang.org/grpc"
 )
 

@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"time"
 
-	"gitlab.com/kickstar/sdk-go/db/mongo/enum"
-	"gitlab.com/kickstar/sdk-go/db/mongo/status"
+	"gitlab.com/kickstar/backend/sdk-go/db/mongo/enum"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db/mongo/status"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	//"fmt"

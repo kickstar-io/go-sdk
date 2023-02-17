@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	e "gitlab.com/kickstar/sdk-go/base/error"
-	"gitlab.com/kickstar/sdk-go/config/vault"
-	"gitlab.com/kickstar/sdk-go/log"
-	"gitlab.com/kickstar/sdk-go/utils"
+	e "gitlab.com/kickstar/backend/sdk-go/base/error"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/config/vault"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/log"
+	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/utils"
 )
 
 type CacheHelper interface {
