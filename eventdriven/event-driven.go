@@ -5,17 +5,17 @@ import (
 
 	"github.com/google/uuid"
 	"gitlab.com/kickstar/backend/go-sdk/base/event"
-	ev "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/event"
-	r "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/cache/redis"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
+	ev "gitlab.com/kickstar/backend/go-sdk/base/event"
+	r "gitlab.com/kickstar/backend/go-sdk/cache/redis"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
 
-	//"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/pubsub/kafka"
+	//"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/pubsub/kafka"
 
 	//"github.com/ThreeDotsLabs/watermill/message"
 	"time"
 
-	e "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/error"
+	e "gitlab.com/kickstar/backend/go-sdk/base/error"
 	//"fmt"
 )
 

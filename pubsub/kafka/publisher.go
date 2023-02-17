@@ -5,9 +5,9 @@ import (
 	"github.com/ThreeDotsLabs/watermill-kafka/v2/pkg/kafka"
 	"github.com/ThreeDotsLabs/watermill/message"
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 
 	//"errors"
 	"fmt"

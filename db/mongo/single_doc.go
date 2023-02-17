@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"gitlab.com/kickstar/backend/go-sdk/db/mongo/enum"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/status"
+	"gitlab.com/kickstar/backend/go-sdk/db/mongo/status"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"gitlab.com/kickstar/backend/go-sdk/config/vault"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 func GetConfig(vault *vault.Vault, config_path string) map[string]string {

@@ -10,7 +10,7 @@ import (
 
 	redis "github.com/redis/go-redis/v9"
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 type RedisHelper struct {

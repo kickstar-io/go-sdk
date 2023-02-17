@@ -6,9 +6,9 @@ import (
 	"fmt"
 
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	ev "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/event"
-	micropb "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/pb/micro"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/model"
+	ev "gitlab.com/kickstar/backend/go-sdk/base/event"
+	micropb "gitlab.com/kickstar/backend/go-sdk/base/pb/micro"
+	"gitlab.com/kickstar/backend/go-sdk/db/mongo/model"
 	"google.golang.org/protobuf/encoding/protojson"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )

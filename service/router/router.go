@@ -2,24 +2,24 @@ package router
 
 import (
 	ev "gitlab.com/kickstar/backend/go-sdk/base/event"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/cache/redis"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
-	ed "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/eventdriven"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
+	"gitlab.com/kickstar/backend/go-sdk/cache/redis"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	ed "gitlab.com/kickstar/backend/go-sdk/eventdriven"
+	"gitlab.com/kickstar/backend/go-sdk/log"
 
-	//"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/pubsub/kafka"
-	//"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db"
-	e "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	//"gitlab.com/kickstar/backend/go-sdk/pubsub/kafka"
+	//"gitlab.com/kickstar/backend/go-sdk/db"
+	e "gitlab.com/kickstar/backend/go-sdk/base/error"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 
-	//"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/status"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/pubsub/kafka"
-	//e "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/error"
+	//"gitlab.com/kickstar/backend/go-sdk/db/mongo/status"
+	"gitlab.com/kickstar/backend/go-sdk/pubsub/kafka"
+	//e "gitlab.com/kickstar/backend/go-sdk/base/error"
 	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db"
+	"gitlab.com/kickstar/backend/go-sdk/db"
 	//"errors"
 )
 

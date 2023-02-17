@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"gitlab.com/kickstar/backend/go-sdk/db/mongo/enum"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/status"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/db/mongo/status"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

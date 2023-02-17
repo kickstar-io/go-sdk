@@ -6,9 +6,9 @@ import (
 	"time"
 
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 type CacheHelper interface {

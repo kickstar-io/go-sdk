@@ -10,21 +10,21 @@ import (
 	//"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/event"
-	r "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/cache/redis"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
-	ed "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/eventdriven"
+	"gitlab.com/kickstar/backend/go-sdk/base/event"
+	r "gitlab.com/kickstar/backend/go-sdk/cache/redis"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	ed "gitlab.com/kickstar/backend/go-sdk/eventdriven"
 
-	//j "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/jwt"
+	//j "gitlab.com/kickstar/backend/go-sdk/jwt"
 	"os/signal"
 	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/service/micro"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/service/micro"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 type Websocket struct {

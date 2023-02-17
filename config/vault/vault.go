@@ -11,8 +11,8 @@ import (
 	"github.com/hashicorp/vault/api"
 	"github.com/joho/godotenv"
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 type Vault struct {

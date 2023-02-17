@@ -2,19 +2,19 @@ package worker
 
 import (
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
-	ed "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/eventdriven"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	ed "gitlab.com/kickstar/backend/go-sdk/eventdriven"
+	"gitlab.com/kickstar/backend/go-sdk/log"
 
-	//"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/pubsub/kafka"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/pubsub/kafka"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/service/micro"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	//"gitlab.com/kickstar/backend/go-sdk/pubsub/kafka"
+	"gitlab.com/kickstar/backend/go-sdk/db"
+	"gitlab.com/kickstar/backend/go-sdk/db/mongo"
+	"gitlab.com/kickstar/backend/go-sdk/pubsub/kafka"
+	"gitlab.com/kickstar/backend/go-sdk/service/micro"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 
-	//"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/status"
-	//e "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/error"
+	//"gitlab.com/kickstar/backend/go-sdk/db/mongo/status"
+	//e "gitlab.com/kickstar/backend/go-sdk/base/error"
 	"fmt"
 	"os"
 

@@ -10,14 +10,14 @@ import (
 	"github.com/google/uuid"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	e "gitlab.com/kickstar/backend/go-sdk/base/error"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/event"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo"
-	ed "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/eventdriven"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/jwt"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/base/event"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	"gitlab.com/kickstar/backend/go-sdk/db"
+	"gitlab.com/kickstar/backend/go-sdk/db/mongo"
+	ed "gitlab.com/kickstar/backend/go-sdk/eventdriven"
+	"gitlab.com/kickstar/backend/go-sdk/jwt"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 type Micro struct {
