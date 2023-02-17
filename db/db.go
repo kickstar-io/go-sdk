@@ -3,13 +3,13 @@ package db
 import (
 	"fmt"
 
-	e "gitlab.com/kickstar/backend/sdk-go/base/error"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/config/vault"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db/mongo"
-	dbcf "gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db/mongo/config"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/encrypt"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/log"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/utils"
+	e "gitlab.com/kickstar/backend/go-sdk/base/error"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/config/vault"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo"
+	dbcf "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/config"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/encrypt"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/log"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
 	mgoDriver "go.mongodb.org/mongo-driver/mongo"
 
 	//"errors"

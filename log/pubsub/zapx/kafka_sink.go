@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/Shopify/sarama"
-	"gitlab.com/kickstar/backend/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 	"go.uber.org/zap"
 )
 

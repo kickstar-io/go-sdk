@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
-	"gitlab.com/kickstar/backend/sdk-go/pubsub/kafka"
+	"gitlab.com/kickstar/backend/go-sdk/pubsub/kafka"
 
 	//"fmt"
 	"encoding/json"

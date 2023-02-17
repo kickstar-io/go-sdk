@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/joho/godotenv"
-	"gitlab.com/kickstar/backend/sdk-go/config/vault"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/utils"
 )
 
 func GetConfig(vault *vault.Vault, config_path string) map[string]string {

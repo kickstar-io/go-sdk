@@ -9,7 +9,7 @@ import (
 	//"fmt"
 	//"errors"
 	redis "github.com/go-redis/redis"
-	e "gitlab.com/kickstar/backend/sdk-go/base/error"
+	e "gitlab.com/kickstar/backend/go-sdk/base/error"
 )
 
 type ClusterRedisHelper struct {

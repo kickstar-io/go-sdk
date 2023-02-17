@@ -5,7 +5,7 @@ import (
 
 	"github.com/ThreeDotsLabs/watermill/message"
 	"github.com/google/uuid"
-	e "gitlab.com/kickstar/backend/sdk-go/base/error"
+	e "gitlab.com/kickstar/backend/go-sdk/base/error"
 )
 
 type ConsumeFn = func(message *message.Message) error

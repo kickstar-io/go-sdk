@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"gitlab.com/kickstar/backend/sdk-go/db/mongo/status"
+	"gitlab.com/kickstar/backend/go-sdk/db/mongo/status"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

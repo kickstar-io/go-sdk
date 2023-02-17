@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/Shopify/sarama"
-	"gitlab.com/kickstar/backend/sdk-go/config/vault"
-	"gitlab.com/kickstar/backend/sdk-go/log"
-	"gitlab.com/kickstar/backend/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/config/vault"
+	"gitlab.com/kickstar/backend/go-sdk/log"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 
 	//"github.com/xdg-go/scram"
 	"fmt"

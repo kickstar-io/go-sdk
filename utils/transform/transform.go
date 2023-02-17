@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	e "gitlab.com/kickstar/backend/sdk-go/base/error"
-	ev "gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/base/event"
-	micropb "gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/base/pb/micro"
-	"gitlab.com/kickstar/backend/sdk-god/sdk-god/sdk-go/db/mongo/model"
+	e "gitlab.com/kickstar/backend/go-sdk/base/error"
+	ev "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/event"
+	micropb "gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/base/pb/micro"
+	"gitlab.com/kickstar/backend/go-sdkd/sdk-god/sdk-go/db/mongo/model"
 	"google.golang.org/protobuf/encoding/protojson"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )

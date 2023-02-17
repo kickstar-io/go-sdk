@@ -3,7 +3,7 @@ package datetime
 import (
 	"time"
 
-	"gitlab.com/kickstar/backend/sdk-go/utils"
+	"gitlab.com/kickstar/backend/go-sdk/utils"
 )
 
 // agrs[0] format

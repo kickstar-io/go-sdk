@@ -2,7 +2,7 @@ package health
 
 import (
 	"net/http"
-	//"gitlab.com/kickstar/backend/sdk-go/log"
+	//"gitlab.com/kickstar/backend/go-sdk/log"
 	"fmt"
 	"io"
 	"time"
