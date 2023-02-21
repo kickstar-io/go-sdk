@@ -138,12 +138,11 @@ func (v *Vault) InitialByToken(service_name string, args ...string) {
 	}
 	client.SetToken(token)
 	v.client = client
-	//
+
 	if len(args) > 0 {
 		v.root_path = args[0]
 	} else {
 		v.root_path = "kv/"
-		//v.root_path = "kv/data/"
 	}
 	if utils.Right(v.root_path, 1) != "/" {
 		v.root_path = v.root_path + "/"
@@ -155,16 +154,12 @@ func (v *Vault) ReadVAR(path string) string {
 	if path == "" {
 		log.Error("ENV path is empty", "VAULT_ERROR")
 	}
-	//fmt.Println(v.root_path)
+
 	arr := utils.Explode(path, "/")
 	var_name := arr[len(arr)-1]
 	folder := strings.Join(arr[:len(arr)-1], "/")
-	//fmt.Println(fmt.Sprintf("%s/%s",v.root_path,folder))
-	//data, err := v.client.Logical().Read("secret/metadata/data/worker/woker1/sub/kafka")
 	data, err := v.client.Logical().Read(fmt.Sprintf("%s%s", v.root_path, folder))
-	//data, err := v.client.Logical().List("secret/metadata/data/worker/kafka-to-alert-mgt/sub/kafka")
-	//fmt.Printf("%+v\r\n",data)
-	//fmt.Println(err)
+
 	if err != nil {
 		log.Warn(err.Error(), "VAULT_ERROR")
 		return ""
@@ -173,12 +168,18 @@ func (v *Vault) ReadVAR(path string) string {
 		log.Warn(fmt.Sprintf("%s not found", path), "VAULT_ERROR")
 		return ""
 	}
+
+	result := ""
 	for k, v := range data.Data {
 		if k == var_name {
-			return utils.ItoString(v)
+			result = utils.ItoString(v)
+			break
 		}
 	}
-	return ""
+
+	fmt.Printf("Read VAR: %s = %s", fmt.Sprintf("%s%s", v.root_path, folder), result)
+
+	return result
 }
 func (v *Vault) CheckPathExist(path string) (bool, *e.Error) {
 	if path == "" {

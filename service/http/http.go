@@ -39,18 +39,10 @@ type HTTPServer struct {
 	Client map[string]*micro.MicroClient
 	//serect key for JWT
 	key      string
-	path_key string
 	//ACL
 	Acl map[string]interface{}
 }
 
-/*
-args[0]: model list
-args[1]: not exist || exist && true then initial publisher, else don't implement publisher
-args[2]: micro client list map[string]string (name - endpoint address)
-args[3]: route white list not check JWT
-args[4]: ACL
-*/
 
 func (sv *HTTPServer) Initial(service_name string) {
 	//get ENV
@@ -61,7 +53,10 @@ func (sv *HTTPServer) Initial(service_name string) {
 			panic(err)
 		}
 	}
+
+	//initial logger
 	log.Initial(service_name)
+	
 	//initial Server configuration
 	var config vault.Vault
 	sv.config = &config
@@ -93,13 +88,14 @@ func (sv *HTTPServer) Initial(service_name string) {
 
 	//new server
 	sv.Srv = echo.New()
-	//
 	sv.Srv.HideBanner = true
 	sv.Srv.HidePort = true
 
+	// add common middleware
 	sv.Srv.Use(middleware.Logger())
 	sv.Srv.Use(middleware.Recover())
 
+	// add jwt middleware
 	config_jwt := middleware.JWTConfig{
 		Claims:        &j.CustomClaims{},
 		SigningKey:    []byte(sv.key),
