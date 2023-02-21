@@ -158,6 +158,11 @@ func (sv *HTTPServer) AddWhitelistRoute(routes []string) {
 	sv.whitelist = routes
 }
 
+// add list acl
+func (sv *HTTPServer) AddACL(acl map[string]interface{}) {
+	sv.Acl = acl
+}
+
 // start
 func (sv *HTTPServer) Start() {
 	if sv.host == "" || sv.port == "" {
