@@ -48,7 +48,7 @@ type GRPCServer struct {
 	whitelist []string
 }
 
-func (g *GRPCServer) Initial(service_name string, args ...interface{}) {
+func (g *GRPCServer) Initial(service_name string) {
 	//get ENV
 	err := godotenv.Load(os.ExpandEnv("/config/.env"))
 	if err != nil {
@@ -101,13 +101,13 @@ func (g *GRPCServer) Initial(service_name string, args ...interface{}) {
 	)
 
 	//whitelist init
-	if len(args) > 0 {
-		arr, err := utils.ItoSliceString(args[0])
-		if err != nil {
-			log.ErrorF(err.Error(), "InitGrpc", "", args)
-		}
-		g.whitelist = arr
-	}
+	// if len(args) > 0 {
+	// 	arr, err := utils.ItoSliceString(args[0])
+	// 	if err != nil {
+	// 		log.ErrorF(err.Error(), "InitGrpc", "", args)
+	// 	}
+	// 	g.whitelist = arr
+	// }
 }
 
 /*
