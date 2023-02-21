@@ -105,13 +105,25 @@ func (v *Vault) Initial(service_name string, args ...string) {
 	}
 	log.Info(fmt.Sprintf("%s %s %s %s: %s", "VAULT server ", v.host, " root path: ", v.root_path, " connected"), "VAULT", "INITIATION")
 }
-func (v *Vault) InitialByToken(host, port, token string, service_name string, args ...string) {
+func (v *Vault) InitialByToken(service_name string, args ...string) {
+	if os.Getenv("KEY_STORE_HOST") == "" {
+		log.ErrorF("KEY_STORE_HOST is empty", "ENV_ERROR", "KEY_STORE_HOST")
+	}
+
+	token := os.Getenv("KEY_STORE_TOKEN")
+	host := os.Getenv("KEY_STORE_HOST")
+	port := os.Getenv("KEY_STORE_PORT")
+
 	if host == "" {
-		log.ErrorF("VAULT Host not found", "VAULT_ERROR", "VAULT_HOST_EMPTY")
+		log.ErrorF("VAULT Host is empty", "VAULT_ERROR", "VAULT_HOST_EMPTY")
 	}
 	if port == "" {
 		port = "8200"
 	}
+	if token == "" {
+		log.ErrorF("VAULT Token is empty", "VAULT_ERROR", "VAULT_TOKEN_EMPTY")
+	}
+
 	v.host = host
 	v.port = port
 	v.token = token
@@ -131,7 +143,7 @@ func (v *Vault) InitialByToken(host, port, token string, service_name string, ar
 	if len(args) > 0 {
 		v.root_path = args[0]
 	} else {
-		v.root_path = "secret/data/"
+		v.root_path = "kv/"
 		//v.root_path = "kv/data/"
 	}
 	if utils.Right(v.root_path, 1) != "/" {

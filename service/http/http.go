@@ -65,13 +65,14 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 	//initial Server configuration
 	var config vault.Vault
 	sv.config = &config
-	sv.config.Initial(service_name)
+	sv.config.InitialByToken(service_name)
+
 	//get config from key-value store
 	http_port_env := sv.config.ReadVAR("api/general/HTTP_PORT")
 	if http_port_env != "" {
 		sv.port = http_port_env
 	}
-	//
+
 	if os.Getenv("HTTP_HOST") == "" {
 		sv.host = "0.0.0.0"
 	} else {
@@ -82,6 +83,7 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 	} else if sv.host == "" {
 		sv.port = "8080"
 	}
+
 	//set service name
 	sv.servicename = service_name
 	//ReInitial Destination for Logger
@@ -92,8 +94,10 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 			log.SetDestKafka(config_map)
 		}
 	}
+
 	//read secret key for generate JWT
-	sv.key = sv.config.ReadVAR("key/api/KEY")
+	sv.key = sv.config.ReadVAR("key/jwt/JWT_TOKEN")
+
 	//publisher
 	if len(args) > 1 {
 		c, err := utils.ItoBool(args[1])
@@ -128,6 +132,7 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 			}
 		}
 	}
+
 	//initial DB args[0] => mongodb
 	if len(args) > 0 {
 		if args[0] != nil {
@@ -142,6 +147,7 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 			}
 		}
 	}
+
 	//
 	var routes_ignore_jwt []string
 	var errh error
@@ -254,6 +260,7 @@ func (sv *HTTPServer) Start() {
 		sv.Srv.Logger.Fatal(err)
 	}
 }
+
 func (sv *HTTPServer) SetPathKey(path string) error {
 	key := sv.config.ReadVAR(path)
 	if key == "" {
@@ -262,6 +269,7 @@ func (sv *HTTPServer) SetPathKey(path string) error {
 	sv.key = path
 	return nil
 }
+
 func (sv *HTTPServer) GetUserID(c echo.Context) (string, error) {
 	token, err := sv.GetToken(c)
 	if err != nil {
@@ -273,6 +281,7 @@ func (sv *HTTPServer) GetUserID(c echo.Context) (string, error) {
 	}
 	return Claims_info.UserID, nil
 }
+
 func (sv *HTTPServer) GetRoleID(c echo.Context) (int, error) {
 	token, err := sv.GetToken(c)
 	if err != nil {
@@ -284,6 +293,7 @@ func (sv *HTTPServer) GetRoleID(c echo.Context) (int, error) {
 	}
 	return Claims_info.RoleID, nil
 }
+
 func (sv *HTTPServer) GetToken(c echo.Context) (string, error) {
 	authen_str := c.Request().Header.Get("Authorization")
 	arr := utils.Explode(authen_str, " ")
@@ -304,31 +314,6 @@ func (sv *HTTPServer) Restricted(c echo.Context) error {
 	return errors.New("Access Deny")
 }
 
-/*
-	func (sv *HTTPServer) JWTConfig() middleware.JWTConfig{
-		config := middleware.JWTConfig{
-			TokenLookup: "query:token",
-			ParseTokenFunc: func(auth string, c echo.Context) (interface{}, error) {
-				keyFunc := func(t *jwt.Token) (interface{}, error) {
-					if t.Method.Alg() != "HS256" {
-					return nil, fmt.Errorf("unexpected jwt signing method=%v", t.Header["alg"])
-					}
-					return sv.key, nil
-				}
-				// claims are of type `jwt.MapClaims` when token is created with `jwt.Parse`
-				token, err := jwt.Parse(auth, keyFunc)
-				if err != nil {
-					return nil, err
-				}
-				if !token.Valid {
-					return nil, errors.New("invalid token")
-				}
-				return token, nil
-			},
-	  	}
-	  	return config
-	}
-*/
 func Map_PublisherContains(m map[string]*ed.EventDriven, item string) bool {
 	if len(m) == 0 {
 		return false
