@@ -154,7 +154,7 @@ func (sv *HTTPServer) Initial(service_name string) {
 }
 
 // add list whitelist route
-func (sv *HTTPServer) AddWhitelistRoute(routes []string) {
+func (sv *HTTPServer) AddWhitelist(routes []string) {
 	sv.whitelist = routes
 }
 
