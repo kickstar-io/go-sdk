@@ -114,9 +114,9 @@ func (sv *HTTPServer) Initial(service_name string) {
 			}
 
 			// add whitelist route
-			// if utils.Contains(routes_ignore_jwt, c.Request().URL.Path) {
-			// 	return true
-			// }
+			if utils.Contains(sv.whitelist, c.Request().URL.Path) {
+				return true
+			}
 			return false
 		},
 		ParseTokenFunc: func(token string, c echo.Context) (interface{}, error) {
