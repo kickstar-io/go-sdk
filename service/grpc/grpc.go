@@ -6,7 +6,6 @@ import (
 
 	"gitlab.com/kickstar/backend/go-sdk/jwt"
 	"gitlab.com/kickstar/backend/go-sdk/log"
-	"gitlab.com/kickstar/backend/go-sdk/log/metric"
 	"gitlab.com/kickstar/backend/go-sdk/utils"
 	"google.golang.org/grpc/metadata"
 
@@ -32,20 +31,24 @@ type GRPCServer struct {
 	host        string
 	port        string
 	servicename string
+
 	//key-value store management
 	config *vault.Vault
+
 	//grpc server
 	service    *grpc.Server
 	two_FA_Key string
 	token_Key  string
+
 	//ACL db store
 	Redis redis.CacheHelper
 	//ACL cache
-	acl       map[string]bool
+	acl map[string]bool
+
 	whitelist []string
 }
 
-func (grpcSRV *GRPCServer) Initial(service_name string, args ...interface{}) {
+func (g *GRPCServer) Initial(service_name string, args ...interface{}) {
 	//get ENV
 	err := godotenv.Load(os.ExpandEnv("/config/.env"))
 	if err != nil {
@@ -54,69 +57,56 @@ func (grpcSRV *GRPCServer) Initial(service_name string, args ...interface{}) {
 			panic(err)
 		}
 	}
+
+	// initial logger
 	log.Initial(service_name)
+
 	//initial Server configuration
 	var config vault.Vault
-	grpcSRV.config = &config
-	grpcSRV.config.Initial(service_name)
+	g.config = &config
+	g.config.InitialByToken(service_name)
+
 	//get config from key-value store
-	micro_port_env := grpcSRV.config.ReadVAR("micro/general/MICRO_PORT")
-	if micro_port_env != "" {
-		grpcSRV.port = micro_port_env
+	port_env := g.config.ReadVAR("grpc/general/GRPC_PORT")
+	if port_env != "" {
+		g.port = port_env
 	}
-	//
-	if os.Getenv("MICRO_HOST") == "" {
-		grpcSRV.host = "0.0.0.0"
-	} else {
-		grpcSRV.host = os.Getenv("MICRO_HOST")
+
+	host_env := g.config.ReadVAR("grpc/general/GRPC_HOST")
+	if host_env != "" {
+		g.host = host_env
 	}
-	if os.Getenv("MICRO_PORT") != "" {
-		grpcSRV.port = os.Getenv("MICRO_PORT")
-	} else if grpcSRV.host == "" {
-		grpcSRV.port = "30000"
-	}
+
 	//set service name
-	grpcSRV.servicename = service_name
+	g.servicename = service_name
 	//ReInitial Destination for Logger
 	if log.LogMode() != 2 { // not in local, locall just output log to std
-		log_dest := grpcSRV.config.ReadVAR("logger/general/LOG_DEST")
+		log_dest := g.config.ReadVAR("logger/general/LOG_DEST")
 		if log_dest == "kafka" {
-			config_map := kafka.GetConfig(grpcSRV.config, "logger/kafka")
+			config_map := kafka.GetConfig(g.config, "logger/kafka")
 			log.SetDestKafka(config_map)
 		}
 	}
-	//init metric
-	config_map := kafka.GetConfig(grpcSRV.config, "metric/kafka")
-	err_m := metric.Initial(service_name, config_map)
-	if err_m != nil {
-		log.Warn(err_m.Error(), "InitMetrics")
-	}
+
 	//new grpc server
 	maxMsgSize := 1024 * 1024 * 1024 //1GB
 	//read 2FA Key for verify token
-	grpcSRV.two_FA_Key = grpcSRV.config.ReadVAR("key/2fa/KEY")
-	grpcSRV.token_Key = grpcSRV.config.ReadVAR("key/api/KEY")
-	//
-	grpcSRV.service = grpc.NewServer(
+	g.two_FA_Key = g.config.ReadVAR("key/2fa/KEY")
+	g.token_Key = g.config.ReadVAR("key/api/KEY")
+
+	g.service = grpc.NewServer(
 		grpc.MaxRecvMsgSize(maxMsgSize),
 		grpc.MaxSendMsgSize(maxMsgSize),
-		grpc.UnaryInterceptor(grpc_auth.UnaryServerInterceptor(grpcSRV.authFunc)), //middleware verify authen
+		grpc.UnaryInterceptor(grpc_auth.UnaryServerInterceptor(g.authFunc)), //middleware verify authen
 	)
-	//ACL init
-	/*
-		var err_r *e.Error
-		grpcSRV.Redis,err_r=redis.NewCacheHelper(grpcSRV.config)
-		if err_r!=nil{
-			log.ErrorF(err_r.Msg(),"gRPC","Initial")
-		}
-	*/
+
 	//whitelist init
 	if len(args) > 0 {
 		arr, err := utils.ItoSliceString(args[0])
 		if err != nil {
 			log.ErrorF(err.Error(), "InitGrpc", "", args)
 		}
-		grpcSRV.whitelist = arr
+		g.whitelist = arr
 	}
 }
 
@@ -226,27 +216,6 @@ func (grpcSRV *GRPCServer) authFunc(ctx context.Context) (context.Context, error
 	if err_v != nil {
 		return nil, err_v
 	}
-
-	//fmt.Println(method)
-	//check acl from cache
-	/*
-		acl_key:=grpcSRV.servicename+"_"+method+"_"+utils.ItoString(claims.RoleID)
-		if !utils.MapB_contains(grpcSRV.acl,acl_key){//not exist, check from redis
-			check, err := grpcSRV.Redis.Exists(acl_key)
-			if err!=nil{
-				return ctx,errors.New("_ACL_REDIS_ERROR_CANNOT_VERIFY_")
-			}
-			if !check{
-				return ctx,errors.New("_ACL_ACCESS_DENY_")
-			}else{
-				grpcSRV.acl[acl_key]=true//store cache
-			}
-		}
-	*/
-	//grpc_ctxtags.Extract(ctx).Set("auth.sub", userClaimFromToken(tokenInfo))
-	// WARNING: in production define your own type to avoid context collisions
-	//newCtx := context.WithValue(ctx, "tokenInfo", tokenInfo)
-	//return newCtx, nil*/
 
 	md, ok := metadata.FromIncomingContext(ctx)
 	if ok {

@@ -49,6 +49,7 @@ func (micro *Micro) Initial(config *vault.Vault, args ...interface{}) {
 	} else {
 		micro.Id = fmt.Sprintf("%s-%s", config.GetServiceName(), hostname)
 	}
+
 	//config store
 	micro.Config = config
 	//initial DB args[0] => mongodb
@@ -65,6 +66,7 @@ func (micro *Micro) Initial(config *vault.Vault, args ...interface{}) {
 			}
 		}
 	}
+	
 	//read 2FA Key for verify token
 	micro.two_FA_Key = micro.Config.ReadVAR("key/2fa/KEY")
 	micro.token_Key = micro.Config.ReadVAR("key/api/KEY")
