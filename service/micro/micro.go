@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -31,7 +30,7 @@ type Micro struct {
 	//micro client
 	Client map[string]*MicroClient
 	//
-	two_FA_Key string
+	two_fa_key string
 	token_Key  string
 }
 
@@ -66,61 +65,62 @@ func (micro *Micro) Initial(config *vault.Vault, args ...interface{}) {
 			}
 		}
 	}
-	
+
 	//read 2FA Key for verify token
-	micro.two_FA_Key = micro.Config.ReadVAR("key/2fa/KEY")
-	micro.token_Key = micro.Config.ReadVAR("key/api/KEY")
-	//initial Event
-	service_path := strings.ReplaceAll(micro.Config.GetServiceName(), ".", "/")
-	if len(args) > 1 {
-		c, err := utils.ItoBool(args[1])
-		if err != nil {
-			log.Warn("Convert Iterface to Bool :"+err.Error(), "MICRO", "HOST_NAME")
-		}
-		if utils.Type(args[1]) == "bool" && c {
-			//find publisher list
-			check, err_p := micro.Config.CheckPathExist(service_path + "/pub/kafka")
-			if err_p != nil {
-				log.ErrorF(err_p.Msg(), micro.Config.GetServiceName(), "Initial")
-			}
-			micro.Pub = make(map[string]*ed.EventDriven)
-			if check { //custom publisher, list event
-				event_list := micro.Config.ListItemByPath(service_path + "/pub/kafka")
-				for _, event := range event_list {
-					if !Map_PublisherContains(micro.Pub, event) && event != "general" {
-						micro.Pub[event] = &ed.EventDriven{}
-						//micro.Pub[event].SetNoUpdatePublishTime(true)
-						err := micro.Pub[event].InitialPublisherWithGlobal(micro.Config, fmt.Sprintf("%s/%s/%s", service_path, "pub/kafka", event), micro.Config.GetServiceName(), event)
-						if err != nil {
-							log.ErrorF(err.Msg(), micro.Config.GetServiceName(), "Initial")
-						}
-					}
-				}
-			} else { //
-				path := "eventbus/kafka"
-				check, err := micro.Config.CheckItemExist(service_path + "/pub/kafka")
-				if err == nil && check { //if pub/kafka is object not folder then use it, else use main bus
-					path = service_path + "/pub/kafka"
-				}
-				micro.Pub["main"] = &ed.EventDriven{}
-				err_p := micro.Pub["main"].InitialPublisher(micro.Config, path, micro.Id)
-				if err_p != nil {
-					log.ErrorF(err_p.Msg(), err_p.Group(), err_p.Key())
-				}
-			}
-		}
-	}
-	//len(args)==3: models, kafka, Client
-	if len(args) > 2 {
-		if args[2] != nil {
-			remote_services, err := utils.ItoDictionaryS(args[2])
-			if err != nil {
-				log.ErrorF(err.Error(), "MICRO", "INITIAL_CONVERTION_MODEL")
-			} else {
-				micro.InitialMicroClient(remote_services, false)
-			}
-		}
-	}
+	micro.two_fa_key = micro.Config.ReadVAR("key/2fa/2FA_TOKEN")
+	micro.token_Key = micro.Config.ReadVAR("key/jwt/JWT_TOKEN")
+
+	// //initial Event
+	// service_path := strings.ReplaceAll(micro.Config.GetServiceName(), ".", "/")
+	// if len(args) > 1 {
+	// 	c, err := utils.ItoBool(args[1])
+	// 	if err != nil {
+	// 		log.Warn("Convert Iterface to Bool :"+err.Error(), "MICRO", "HOST_NAME")
+	// 	}
+	// 	if utils.Type(args[1]) == "bool" && c {
+	// 		//find publisher list
+	// 		check, err_p := micro.Config.CheckPathExist(service_path + "/pub/kafka")
+	// 		if err_p != nil {
+	// 			log.ErrorF(err_p.Msg(), micro.Config.GetServiceName(), "Initial")
+	// 		}
+	// 		micro.Pub = make(map[string]*ed.EventDriven)
+	// 		if check { //custom publisher, list event
+	// 			event_list := micro.Config.ListItemByPath(service_path + "/pub/kafka")
+	// 			for _, event := range event_list {
+	// 				if !Map_PublisherContains(micro.Pub, event) && event != "general" {
+	// 					micro.Pub[event] = &ed.EventDriven{}
+	// 					//micro.Pub[event].SetNoUpdatePublishTime(true)
+	// 					err := micro.Pub[event].InitialPublisherWithGlobal(micro.Config, fmt.Sprintf("%s/%s/%s", service_path, "pub/kafka", event), micro.Config.GetServiceName(), event)
+	// 					if err != nil {
+	// 						log.ErrorF(err.Msg(), micro.Config.GetServiceName(), "Initial")
+	// 					}
+	// 				}
+	// 			}
+	// 		} else { //
+	// 			path := "eventbus/kafka"
+	// 			check, err := micro.Config.CheckItemExist(service_path + "/pub/kafka")
+	// 			if err == nil && check { //if pub/kafka is object not folder then use it, else use main bus
+	// 				path = service_path + "/pub/kafka"
+	// 			}
+	// 			micro.Pub["main"] = &ed.EventDriven{}
+	// 			err_p := micro.Pub["main"].InitialPublisher(micro.Config, path, micro.Id)
+	// 			if err_p != nil {
+	// 				log.ErrorF(err_p.Msg(), err_p.Group(), err_p.Key())
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// //len(args)==3: models, kafka, Client
+	// if len(args) > 2 {
+	// 	if args[2] != nil {
+	// 		remote_services, err := utils.ItoDictionaryS(args[2])
+	// 		if err != nil {
+	// 			log.ErrorF(err.Error(), "MICRO", "INITIAL_CONVERTION_MODEL")
+	// 		} else {
+	// 			micro.InitialMicroClient(remote_services, false)
+	// 		}
+	// 	}
+	// }
 }
 func (micro *Micro) InitialMicroClient(remote_services map[string]string, initConnection bool) {
 	//
