@@ -100,14 +100,10 @@ func (g *GRPCServer) Initial(service_name string) {
 		grpc.UnaryInterceptor(grpc_auth.UnaryServerInterceptor(g.authFunc)), //middleware verify authen
 	)
 
-	//whitelist init
-	// if len(args) > 0 {
-	// 	arr, err := utils.ItoSliceString(args[0])
-	// 	if err != nil {
-	// 		log.ErrorF(err.Error(), "InitGrpc", "", args)
-	// 	}
-	// 	g.whitelist = arr
-	// }
+}
+
+func (g *GRPCServer) AddWhitelist(whitelist []string) {
+	g.whitelist = whitelist
 }
 
 /*
