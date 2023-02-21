@@ -2,7 +2,6 @@ package vault
 
 import (
 	"fmt"
-	"net"
 	"net/http"
 	"os"
 	"strings"
@@ -132,7 +131,7 @@ func (v *Vault) InitialByToken(service_name string, args ...string) {
 	var httpClient = &http.Client{
 		Timeout: 10 * time.Second,
 	}
-	vaultAddr := net.JoinHostPort(v.host, v.port)
+	vaultAddr := v.host + ":" + v.port
 	client, err := api.NewClient(&api.Config{Address: vaultAddr, HttpClient: httpClient})
 	if err != nil {
 		log.ErrorF(err.Error(), "VAULT_ERROR")
