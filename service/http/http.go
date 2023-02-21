@@ -38,11 +38,11 @@ type HTTPServer struct {
 	//micro client
 	Client map[string]*micro.MicroClient
 	//serect key for JWT
-	key      string
+	key       string
+	whitelist []string
 	//ACL
 	Acl map[string]interface{}
 }
-
 
 func (sv *HTTPServer) Initial(service_name string) {
 	//get ENV
@@ -151,6 +151,11 @@ func (sv *HTTPServer) Initial(service_name string) {
 		AllowMethods: []string{"*"},
 	}))
 	sv.Srv.Use(middleware.JWTWithConfig(config_jwt))
+}
+
+// add list whitelist route
+func (sv *HTTPServer) AddWhitelistRoute(routes []string) {
+	sv.whitelist = routes
 }
 
 // start
