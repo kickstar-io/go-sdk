@@ -160,7 +160,6 @@ func (v *Vault) ReadVAR(path string) string {
 	folder := strings.Join(arr[:len(arr)-1], "/")
 	data, err := v.client.Logical().Read(fmt.Sprintf("%s%s", v.root_path, folder))
 
-	fmt.Println(data, err)
 	if err != nil {
 		log.Warn(err.Error(), "VAULT_ERROR")
 		return ""
@@ -172,7 +171,6 @@ func (v *Vault) ReadVAR(path string) string {
 
 	result := ""
 	for k, v := range data.Data {
-		fmt.Println(k, v)
 		if k == var_name {
 			result = utils.ItoString(v)
 			break
