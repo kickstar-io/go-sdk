@@ -150,6 +150,7 @@ func (v *Vault) InitialByToken(service_name string, args ...string) {
 	}
 	log.Info(fmt.Sprintf("%s %s %s %s: %s", "VAULT server ", v.host, " root path: ", v.root_path, " connected"), "VAULT", "INITIATION")
 }
+
 func (v *Vault) ReadVAR(path string) string {
 	if path == "" {
 		log.Error("ENV path is empty", "VAULT_ERROR")

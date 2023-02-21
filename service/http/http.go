@@ -52,7 +52,7 @@ args[3]: route white list not check JWT
 args[4]: ACL
 */
 
-func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
+func (sv *HTTPServer) Initial(service_name string) {
 	//get ENV
 	err := godotenv.Load(os.ExpandEnv("/config/.env"))
 	if err != nil {
@@ -72,16 +72,9 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 	if http_port_env != "" {
 		sv.port = http_port_env
 	}
-
-	if os.Getenv("HTTP_HOST") == "" {
-		sv.host = "0.0.0.0"
-	} else {
-		sv.host = os.Getenv("HTTP_HOST")
-	}
-	if os.Getenv("HTTP_PORT") != "" {
-		sv.port = os.Getenv("HTTP_PORT")
-	} else if sv.host == "" {
-		sv.port = "8080"
+	http_host_env := sv.config.ReadVAR("api/general/HTTP_HOST")
+	if http_host_env != "" {
+		sv.host = http_host_env
 	}
 
 	//set service name
@@ -98,73 +91,6 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 	//read secret key for generate JWT
 	sv.key = sv.config.ReadVAR("key/jwt/JWT_TOKEN")
 
-	//publisher
-	if len(args) > 1 {
-		c, err := utils.ItoBool(args[1])
-		if err != nil {
-			log.Warn("Convert Iterface to Bool :"+err.Error(), "MICRO", "HOST_NAME")
-		}
-		if utils.Type(args[1]) == "bool" && c {
-			// load event_routing(event_name, bus_name) table/ event_mapping db
-			pub_path := fmt.Sprintf("%s/%s/%s", "api", sv.servicename, "pub/kafka")
-			check, err_p := sv.config.CheckPathExist(pub_path)
-			if err_p != nil {
-				log.ErrorF(err_p.Msg(), sv.servicename, "Initial")
-			}
-			if check {
-				event_list := sv.config.ListItemByPath(pub_path)
-				sv.Pub = make(map[string]*ed.EventDriven)
-				for _, event := range event_list {
-					if !Map_PublisherContains(sv.Pub, event) && event != "general" {
-						sv.Pub[event] = &ed.EventDriven{}
-						//r.Pub[event].SetNoUpdatePublishTime(true)
-						err := sv.Pub[event].InitialPublisherWithGlobal(sv.config, fmt.Sprintf("%s/%s", pub_path, event), sv.servicename, event)
-						if err != nil {
-							log.ErrorF(err.Msg(), sv.servicename, "Initial")
-						}
-					}
-				}
-			} else {
-				err_p := sv.Pub["main"].InitialPublisher(sv.config, "eventbus/kafka", sv.servicename)
-				if err_p != nil {
-					log.ErrorF(err_p.Msg(), err_p.Group(), err_p.Key())
-				}
-			}
-		}
-	}
-
-	//initial DB args[0] => mongodb
-	if len(args) > 0 {
-		if args[0] != nil {
-			models, err := utils.ItoDictionary(args[0])
-			if err != nil {
-				log.ErrorF(err.Error(), "MICRO", "INITIAL_CONVERTION_MODEL")
-			} else {
-				err_init := sv.Mgo.Initial(sv.config, models)
-				if err_init != nil {
-					log.Warn(err_init.Msg(), err_init.Group(), err_init.Key())
-				}
-			}
-		}
-	}
-
-	//
-	var routes_ignore_jwt []string
-	var errh error
-	if len(args) > 3 {
-		routes_ignore_jwt, errh = utils.ItoSliceString(args[3])
-		if errh != nil {
-			log.Warn(errh.Error(), "HttpServerInit", "RoutesIgnoreJWT")
-		}
-
-	}
-	if len(args) > 4 {
-		var err error
-		sv.Acl, err = utils.ItoDictionary(args[4])
-		if err != nil {
-			log.Warn(errh.Error(), "HttpServerInit", "ACL")
-		}
-	}
 	//new server
 	sv.Srv = echo.New()
 	//
@@ -191,9 +117,10 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 				fmt.Println("Route: ", c.Request().URL.Path)
 			}
 
-			if utils.Contains(routes_ignore_jwt, c.Request().URL.Path) {
-				return true
-			}
+			// add whitelist route
+			// if utils.Contains(routes_ignore_jwt, c.Request().URL.Path) {
+			// 	return true
+			// }
 			return false
 		},
 		ParseTokenFunc: func(token string, c echo.Context) (interface{}, error) {
@@ -220,11 +147,7 @@ func (sv *HTTPServer) Initial(service_name string, args ...interface{}) {
 			return token, nil
 		},
 	}
-	/*
-		group route
-		g := e.Group("/admin", <your-middleware>)
-		g.GET("/secured", <your-handler>) =>/admin/secured
-	*/
+
 	//disable CORS
 	sv.Srv.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
