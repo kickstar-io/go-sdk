@@ -171,6 +171,7 @@ func (v *Vault) ReadVAR(path string) string {
 
 	result := ""
 	for k, v := range data.Data {
+		fmt.Println(k, v)
 		if k == var_name {
 			result = utils.ItoString(v)
 			break

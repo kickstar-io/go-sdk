@@ -56,7 +56,7 @@ func (sv *HTTPServer) Initial(service_name string) {
 
 	//initial logger
 	log.Initial(service_name)
-	
+
 	//initial Server configuration
 	var config vault.Vault
 	sv.config = &config
