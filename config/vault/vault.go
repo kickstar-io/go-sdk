@@ -142,7 +142,7 @@ func (v *Vault) InitialByToken(service_name string, args ...string) {
 	if len(args) > 0 {
 		v.root_path = args[0]
 	} else {
-		v.root_path = "kv/"
+		v.root_path = "data/"
 	}
 	if utils.Right(v.root_path, 1) != "/" {
 		v.root_path = v.root_path + "/"
