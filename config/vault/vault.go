@@ -177,7 +177,7 @@ func (v *Vault) ReadVAR(path string) string {
 		}
 	}
 
-	log.Info("Read VAR: %s/%s = %s", fmt.Sprintf("%s%s", v.root_path, folder), var_name, result)
+	log.Info(fmt.Sprintf("Read VAR: %s/%s = %s", fmt.Sprintf("%s%s", v.root_path, folder), var_name, result))
 
 	return result
 }
