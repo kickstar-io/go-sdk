@@ -1,4 +1,4 @@
-module github.com/ponlv/go-kit
+module github.com/kickstar-io/go-sdk
 
 go 1.18
 

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ponlv/go-kit/mongodb/utils"
+	"github.com/kickstar-io/go-sdk/mongodb/utils"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

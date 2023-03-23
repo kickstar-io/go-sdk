@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/ponlv/go-kit/mongodb/utils"
+	"github.com/kickstar-io/go-sdk/mongodb/utils"
 
 	"github.com/jinzhu/inflection"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -56,7 +56,7 @@ func CollName(m Model) string {
 }
 
 // UpsertTrueOption returns new instance of the
-//UpdateOptions with upsert=true property.
+// UpdateOptions with upsert=true property.
 func UpsertTrueOption() *options.UpdateOptions {
 	upsert := true
 	return &options.UpdateOptions{Upsert: &upsert}

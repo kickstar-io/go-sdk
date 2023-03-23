@@ -12,8 +12,8 @@ import (
 	"syscall"
 
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
-	"github.com/ponlv/go-kit/jwt"
-	"github.com/ponlv/go-kit/plog"
+	"github.com/kickstar-io/go-sdk/jwt"
+	"github.com/kickstar-io/go-sdkgo-sdk/plog"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -47,7 +47,7 @@ func Initial(name, host, port, tokenKey string, whitelist []string) {
 	grpcInstance.name = name
 	grpcInstance.tokenKey = tokenKey
 	grpcInstance.whitelist = whitelist
-	
+
 	maxMsgSize := 1024 * 1024 * 1024 //1GB
 	grpcInstance.service = grpc.NewServer(
 		grpc.MaxRecvMsgSize(maxMsgSize),

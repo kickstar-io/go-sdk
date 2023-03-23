@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"time"
 
-	plock "github.com/ponlv/go-kit/redis/lock"
+	plock "github.com/kickstar-io/go-sdk/redis/lock"
 
 	goredislib "github.com/go-redis/redis/v8"
 	"github.com/go-redsync/redsync/v4/redis"

@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ponlv/go-kit/plog"
+	"github.com/kickstar-io/go-sdk/plog"
 
 	"github.com/pkg/errors"
 	amqp "github.com/rabbitmq/amqp091-go"

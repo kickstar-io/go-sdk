@@ -6,8 +6,8 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ponlv/go-kit/ethereum/ethutils"
-	"github.com/ponlv/go-kit/plog"
+	"github.com/kickstar-io/go-sdk/ethereum/ethutils"
+	"github.com/kickstar-io/go-sdkgo-sdk/plog"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"

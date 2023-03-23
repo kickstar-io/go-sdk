@@ -4,7 +4,7 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/ponlv/go-kit/plog"
+	"github.com/kickstar-io/go-sdk/plog"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"

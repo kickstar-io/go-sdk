@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ponlv/go-kit/plog"
+	"github.com/kickstar-io/go-sdk/plog"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )

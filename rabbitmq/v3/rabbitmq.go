@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ponlv/go-kit/plog"
+	"github.com/kickstar-io/go-sdk/plog"
 
 	"github.com/makasim/amqpextra"
 	"github.com/makasim/amqpextra/consumer"
