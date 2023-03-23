@@ -17,7 +17,7 @@ type CustomClaims struct {
 	jwt.RegisteredClaims
 }
 
-func GenerateJWTToken(key_sign, user_id, username, email, ttype string, role_id, expired int) (string, error) {
+func GenerateJWTToken(key_sign, user_id, username, email, ttype, issuer string, role_id, expired int) (string, error) {
 	signingKey := []byte(key_sign)
 	// Create the claims
 	claims := CustomClaims{
@@ -29,7 +29,7 @@ func GenerateJWTToken(key_sign, user_id, username, email, ttype string, role_id,
 		jwt.RegisteredClaims{
 			// A usual scenario is to set the expiration time relative to the current time
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(expired) * time.Second)),
-			Issuer:    "kickstar.io",
+			Issuer:    issuer,
 		},
 	}
 	//fmt.Printf("%+v\r\n",claims)
@@ -40,9 +40,6 @@ func GenerateJWTToken(key_sign, user_id, username, email, ttype string, role_id,
 	}
 	return res, nil
 }
-
-//return
-// - int: number of second token expired , 0 if not expired
 
 func TokenExpiredTime(key, token_string string) float64 {
 	var claims CustomClaims
@@ -62,6 +59,7 @@ func TokenExpiredTime(key, token_string string) float64 {
 	}
 	return 0
 }
+
 func VerifyJWTToken(key, token_string string) (*CustomClaims, error) {
 	if key == "" {
 		return nil, errors.New("_KEY_IS_EMPTY_")
@@ -76,7 +74,6 @@ func VerifyJWTToken(key, token_string string) (*CustomClaims, error) {
 		return []byte(key), nil
 	})
 	claim, ok := token.Claims.(*CustomClaims)
-	//fmt.Printf("%+v\r\n",token.Claims)
 	if ok && token.Valid {
 		return claim, nil
 	}
