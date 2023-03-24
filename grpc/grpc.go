@@ -13,7 +13,7 @@ import (
 
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	"github.com/kickstar-io/go-sdk/jwt"
-	"github.com/kickstar-io/go-sdkgo-sdk/plog"
+	"github.com/kickstar-io/go-sdk/plog"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
