@@ -49,7 +49,7 @@ func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config) (context.Contex
 
 	config = conf
 	dbName = dbConfig.DbName
-	connectionString := fmt.Sprintf(`mongodb+srv://%s:%s@%s/admin?retryWrites=true&w=majority&authSource=admin`,
+	connectionString := fmt.Sprintf(`mongodb://%s:%s@%s/admin?retryWrites=true&w=majority&authSource=admin`,
 		dbConfig.Username,
 		dbConfig.Password, dbConfig.Host)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
