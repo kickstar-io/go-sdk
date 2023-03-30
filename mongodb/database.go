@@ -52,7 +52,9 @@ func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config) (context.Contex
 	}
 
 	// disable tls
-	clientOption.SetTLSConfig(&tls.Config{})
+	clientOption.SetTLSConfig(&tls.Config{
+		InsecureSkipVerify: true,
+	})
 
 	clientNew, err := NewClient(ctx, clientOption)
 	if err != nil {
