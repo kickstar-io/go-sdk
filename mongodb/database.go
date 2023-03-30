@@ -8,7 +8,6 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 func GetDB() *mongo.Database {
@@ -37,7 +36,6 @@ func defaultDB() *DBConfig {
 	return dbCfg
 }
 
-
 func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config, tlsConf *tls.Config) (context.Context, *mongo.Client, context.CancelFunc, error) {
 	if conf == nil {
 		conf = defaultConf()
@@ -52,8 +50,10 @@ func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config, tlsConf *tls.Co
 		clientOption.SetMaxPoolSize(dbConfig.MaxConnectionPool)
 	}
 
-	// disable tls
-	clientOption.SetTLSConfig(tlsConf)
+	// tls config
+	if tlsConf != nil {
+		clientOption.SetTLSConfig(tlsConf)
+	}
 
 	clientNew, err := NewClient(ctx, clientOption)
 	if err != nil {
@@ -61,7 +61,7 @@ func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config, tlsConf *tls.Co
 	}
 	client = clientNew
 
-	err = client.Ping(ctx, readpref.Primary())
+	err = client.Ping(ctx, nil)
 	if err != nil {
 		log.Fatalf("[FATAL] CAN'T CONNECTING TO MONGODB: %s", err.Error())
 		return ctx, nil, cancel, err
