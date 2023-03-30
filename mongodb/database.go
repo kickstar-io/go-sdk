@@ -63,7 +63,7 @@ func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config, tlsConf *tls.Co
 
 	err = client.Ping(ctx, nil)
 	if err != nil {
-		log.Fatalf("[FATAL] CAN'T CONNECTING TO MONGODB: %s", err.Error())
+		log.Fatalf("[FATAL] CAN'T CONNECT TO MONGODB: %s", err.Error())
 		return ctx, nil, cancel, err
 	}
 
