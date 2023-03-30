@@ -37,7 +37,8 @@ func defaultDB() *DBConfig {
 	return dbCfg
 }
 
-func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config) (context.Context, *mongo.Client, context.CancelFunc, error) {
+
+func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config, tlsConf *tls.Config) (context.Context, *mongo.Client, context.CancelFunc, error) {
 	if conf == nil {
 		conf = defaultConf()
 	}
@@ -52,9 +53,7 @@ func ConnectMongoWithConfig(dbConfig *MongoConfig, conf *Config) (context.Contex
 	}
 
 	// disable tls
-	clientOption.SetTLSConfig(&tls.Config{
-		InsecureSkipVerify: true,
-	})
+	clientOption.SetTLSConfig(tlsConf)
 
 	clientNew, err := NewClient(ctx, clientOption)
 	if err != nil {
